@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 	private final Log log = LogFactory.getLog(getClass());
 	
-	@RequestMapping(value = "/error.do", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/welcome.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String error(HttpServletRequest req, HttpServletResponse res, ModelMap model) throws Exception {
 		return "welcome";
 	}
