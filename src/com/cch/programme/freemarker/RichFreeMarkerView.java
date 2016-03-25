@@ -13,12 +13,12 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
  */
 public class RichFreeMarkerView extends FreeMarkerView {
 	/**
-     * ²¿ÊğÂ·¾¶ÊôĞÔÃû³Æ
+     * éƒ¨ç½²è·¯å¾„å±æ€§åç§°
      */
     public static final String CONTEXT_PATH = "base";
 
     /**
-     * ÔÚmodelÖĞÔö¼Ó²¿ÊğÂ·¾¶base£¬·½±ã´¦Àí²¿ÊğÂ·¾¶ÎÊÌâ¡£
+     * åœ¨modelä¸­å¢åŠ éƒ¨ç½²è·¯å¾„baseï¼Œæ–¹ä¾¿å¤„ç†éƒ¨ç½²è·¯å¾„é—®é¢˜ã€‚
      */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override

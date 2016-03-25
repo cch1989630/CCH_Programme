@@ -8,7 +8,7 @@ import java.util.List;
 public class WeixinUtil {
 	
 	/**
-	 * ÑéÖ¤Î¢ĞÅ½ÓÈëÊ±µÄÓĞĞ§ĞÔ
+	 * éªŒè¯å¾®ä¿¡æ¥å…¥æ—¶çš„æœ‰æ•ˆæ€§
 	 * @param signature
 	 * @param timestamp
 	 * @param nonce
@@ -19,7 +19,7 @@ public class WeixinUtil {
 		params.add(WeixinConstants.Token);
 		params.add(timestamp);
 		params.add(nonce);
-		//½«Èı¸ö²ÎÊı½øĞĞ×ÖµäÅÅĞò
+		//å°†ä¸‰ä¸ªå‚æ•°è¿›è¡Œå­—å…¸æ’åº
 		Collections.sort(params, new Comparator<String>() {
 
 			@Override
@@ -32,7 +32,7 @@ public class WeixinUtil {
 		for (String param : params) {
 			needEncryptString = needEncryptString + param;
 		}
-		//Ê¹ÓÃsha1¶ÔÈë²Î½øĞĞ¼ÓÃÜ
+		//ä½¿ç”¨sha1å¯¹å…¥å‚è¿›è¡ŒåŠ å¯†
 		String encryptString = SHA1.encode(needEncryptString);
 		
 		return encryptString;

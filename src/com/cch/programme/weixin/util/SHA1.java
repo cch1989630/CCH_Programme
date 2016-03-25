@@ -15,7 +15,7 @@ public class SHA1 {
     private static String getFormattedText(byte[] bytes) {  
         int len = bytes.length;  
         StringBuilder buf = new StringBuilder(len * 2);  
-        // 把密文转换成十六进制的字符串形式  
+        // 鎶婂瘑鏂囪浆鎹㈡垚鍗佸叚杩涘埗鐨勫瓧绗︿覆褰㈠紡  
         for (int j = 0; j < len; j++) {  
             buf.append(HEX_DIGITS[(bytes[j] >> 4) & 0x0f]);  
             buf.append(HEX_DIGITS[bytes[j] & 0x0f]);  

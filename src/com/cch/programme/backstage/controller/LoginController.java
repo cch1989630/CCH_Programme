@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * 后台登录和退出功能controller
+ * 鍚庡彴鐧诲綍鍜岄��鍑哄姛鑳絚ontroller
  * @author cch
  *
  */
