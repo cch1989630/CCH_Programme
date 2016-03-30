@@ -1,5 +1,7 @@
 package com.cch.programme.weixin.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,13 +25,16 @@ public class WeixinController {
 	
 	/**
 	 * 用于微信校验我们服务器的请求
+	 * 只支持get方法
 	 * @param req
 	 * @param res
 	 * @param model
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/weixinAccess.do", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/weixinAccess.do", method = {RequestMethod.GET})
 	public void weixinAccess(HttpServletRequest req, HttpServletResponse res, ModelMap model) throws Exception {
+		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
 		String signature = req.getParameter("signature");
 		String timestamp = req.getParameter("timestamp");
 		String nonce = req.getParameter("nonce");
@@ -46,6 +51,35 @@ public class WeixinController {
 		if (signature.equals(encryptString)) {
 			res.getWriter().write(echostr);;
 		}
+	}
+	
+	
+	/**
+	 * 用于接受微信发送过来的消息推送
+	 * @param req
+	 * @param res
+	 * @param model
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/weixinAccess.do", method = {RequestMethod.POST})
+	public void accessMessageFromWeixin(HttpServletRequest req, HttpServletResponse res, ModelMap model) throws Exception {
+		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
+		
+		String signature = req.getParameter("signature");
+		String timestamp = req.getParameter("timestamp");
+		String nonce = req.getParameter("nonce");
+		
+		PrintWriter out = res.getWriter();
+		String encryptString = WeixinUtil.encryptAccess(timestamp, nonce);
+		if (signature.equals(encryptString)) {
+			String returnXml = WeixinUtil.processRequest(req);
+			log.info(returnXml);
+			out.write(returnXml);
+		}
+		out.flush();
+		out.close();
+		out = null;
 	}
 	
 	/**
