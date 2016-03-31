@@ -170,7 +170,7 @@ public class WeixinUtil {
 				//事件类型
 				String eventType = requestMap.get("Event");
 				if (eventType.equals(WeixinConstants.EVENT_TYPE_SUBSCRIBE)) {
-					respContent = "谢谢您的关注";
+					respContent = "谢谢您的关注，您可以从<a href='http://121.42.197.232/CCHPRO/welcome.do'>楠华祈梦</a>中获取到更多的信息。";
 				} else if(eventType.equals(WeixinConstants.EVENT_TYPE_UNSUBSCRIBE)) {
 					//取消关注
 				} else if(eventType.equals(WeixinConstants.EVENT_TYPE_SCAN)) {
