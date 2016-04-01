@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.cch.programme.util.CCHException;
+
 
 /*
  * 用于给Ajax统一调用的controller，并且做到
@@ -62,10 +64,31 @@ public class AjaxSubmitController {
 			jo = (JSONObject) method.invoke(classObject, argsObject);
 			jo.put("state", 1);
 			res.getWriter().print(jo.toString());
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-			res.setStatus(500);
-			res.getWriter().print(e.getTargetException().getMessage());
+		} catch (Exception e) {
+			if (e instanceof InvocationTargetException) {
+				InvocationTargetException targerException = (InvocationTargetException) e;
+				if (targerException.getTargetException() instanceof CCHException) {
+					//提示信息不需要前台抛出
+					//e.printStackTrace();
+					CCHException cchException = (CCHException) targerException.getTargetException();
+					res.setStatus(500);
+					res.getWriter().print(cchException.getExceptionMessage());
+				} else {
+					/*系统出错，应该是代码问题，不能直接把错误抛给用户
+					 * 需要用日志把错误记录下来，方便查看
+					*/
+					//e.printStackTrace();
+					res.setStatus(500);
+					res.getWriter().print("系统出错，工程师马上到！请稍后");
+				}
+			} else {
+				/*系统出错，应该是代码问题，不能直接把错误抛给用户
+				 * 需要用日志把错误记录下来，方便查看
+				*/
+				//e.printStackTrace();
+				res.setStatus(500);
+				res.getWriter().print("系统出错，工程师马上到！请稍后");
+			}
 		}
 	}
 	
@@ -110,9 +133,31 @@ public class AjaxSubmitController {
 			returnString = (String) (method.invoke(classObject, argsObject));
 			model.addAllAttributes(map);
 			return returnString;
-		} catch (InvocationTargetException e) {
-			res.setStatus(500);
-			res.getWriter().print(e.getTargetException().getMessage());
+		} catch (Exception e) {
+			if (e instanceof InvocationTargetException) {
+				InvocationTargetException targerException = (InvocationTargetException) e;
+				if (targerException.getTargetException() instanceof CCHException) {
+					//提示信息不需要前台抛出
+					//e.printStackTrace();
+					CCHException cchException = (CCHException) targerException.getTargetException();
+					res.setStatus(500);
+					res.getWriter().print(cchException.getExceptionMessage());
+				} else {
+					/*系统出错，应该是代码问题，不能直接把错误抛给用户
+					 * 需要用日志把错误记录下来，方便查看
+					*/
+					//e.printStackTrace();
+					res.setStatus(500);
+					res.getWriter().print("系统出错，工程师马上到！请稍后");
+				}
+			} else {
+				/*系统出错，应该是代码问题，不能直接把错误抛给用户
+				 * 需要用日志把错误记录下来，方便查看
+				*/
+				//e.printStackTrace();
+				res.setStatus(500);
+				res.getWriter().print("系统出错，工程师马上到！请稍后");
+			}
 		}
 		return returnString;
 	}

@@ -96,4 +96,5 @@
             </bean>  
         </property>  
     </bean>
+    <context:component-scan base-package="com.cch.programme" />
 </beans>
